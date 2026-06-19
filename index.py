@@ -64,7 +64,8 @@ def consultar_por_cedula(cedula):
 
             # --- Manejo de la foto ---
             foto_base64 = data.get("foto")
-            foto_filename = f"foto_{cedula}.jpg"
+            os.makedirs("img", exist_ok=True)  # crea carpeta img si no existe
+            foto_filename = os.path.join("img", f"foto_{cedula}.jpg")
 
             if foto_base64:
                 try:
