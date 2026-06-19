@@ -1,0 +1,38 @@
+import requests
+
+def obtener_fecha_nacimiento(cedula, nombre):
+    # URL de la página de consulta
+    url = 'https://consultasecuador.com/en-linea/personas/consultar-fecha-nacimiento'
+
+    # Parámetros de la solicitud
+    params = {
+        'cedula': cedula,
+        'nombre': nombre,
+        'pago': 'true'  # Modifica este parámetro para simular el pago
+    }
+
+    # Hacer la solicitud GET
+    response = requests.get(url, params=params)
+
+    # Verificar si la solicitud fue exitosa
+    if response.status_code == 200:
+        # Analizar la respuesta JSON
+        data = response.json()
+        # Extraer la fecha de nacimiento
+        fecha_nacimiento = data.get('fecha_nacimiento')
+        return fecha_nacimiento
+    else:
+        return None
+
+# Datos de la persona
+cedula = '123456789'
+nombre = 'Juan Pérez'
+
+# Obtener la fecha de nacimiento
+fecha_nacimiento = obtener_fecha_nacimiento(cedula, nombre)
+
+# Imprimir el resultado
+if fecha_nacimiento:
+    print(f'La fecha de nacimiento es: {fecha_nacimiento}')
+else:
+    print('No se pudo obtener la fecha de nacimiento.')
