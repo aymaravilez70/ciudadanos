@@ -3,139 +3,264 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfiles Ciudadanos</title>
+  <title>Registro Civil — Perfiles Ciudadanos</title>
+  <!-- Import Premium Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      color-scheme: light;
-      --bg: #eff3f8;
-      --surface: #ffffff;
-      --surface-soft: #f8fafc;
-      --text: #0f172a;
-      --muted: #475569;
-      --border: #e2e8f0;
+      --bg: #080c14;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
       --accent: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.4);
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      --success: #10b981;
     }
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
+
     body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+      background: radial-gradient(circle at top, #111827 0%, #030712 100%);
       color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
+      padding-bottom: 60px;
+      overflow-x: hidden;
     }
+
     header {
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 22px 20px 18px;
+      padding: 60px 20px 40px;
       text-align: center;
-      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.15);
+      position: relative;
     }
+
+    /* Decorative background light */
+    header::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 200px;
+      background: var(--accent);
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
     header h1 {
-      margin: 0;
-      font-size: clamp(1.8rem, 2.3vw, 2.1rem);
-      letter-spacing: 0.02em;
-      line-height: 1.08;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #ffffff 30%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
     header p {
-      margin: 10px auto 0;
-      max-width: 700px;
-      color: #cbd5e1;
-      font-size: 0.94rem;
-      line-height: 1.7;
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 400;
+      line-height: 1.6;
     }
+
     .container {
-      max-width: 1100px;
-      margin: 0 auto 32px;
-      padding: 28px 16px 10px;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 30px;
     }
+
     .card {
-      background: var(--surface);
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      border-radius: 20px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(37, 99, 235, 0.16);
-      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.1);
-    }
-    .card img {
-      width: 100%;
-      height: auto;
-      max-height: 360px;
-      object-fit: contain;
-      display: block;
-      background: #e2e8f0;
-    }
-    .card-body {
-      padding: 20px 20px 22px;
-    }
-    .card-title {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--text);
-    }
-    .subtitle {
-      margin: 10px 0 16px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.65;
-    }
-    .profile-data {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px 16px;
-    }
-    .data-row {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      padding: 12px 10px;
-      border-radius: 14px;
-      background: var(--surface-soft);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
-    .data-label {
-      font-size: 0.8rem;
-      color: #64748b;
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      padding: 1.5px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(37, 99, 235, 0.15), 0 0 0 2px rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    /* Photo Container with overlay gradient */
+    .photo-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      background: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card:hover .photo-container img {
+      transform: scale(1.05);
+    }
+
+    /* Fade-out gradient overlay on photo */
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--card-bg) 0%, rgba(17, 24, 39, 0.4) 60%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Badge on photo */
+    .doc-type-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(37, 99, 235, 0.85);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .card-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .subtitle-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .subtitle-badge {
+      font-size: 0.8rem;
       font-weight: 600;
-      margin: 0;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
     }
+
+    .subtitle-badge.cedula-badge {
+      background: rgba(59, 130, 246, 0.08);
+      color: #93c5fd;
+      border-color: rgba(59, 130, 246, 0.2);
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+
+    .profile-data {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      gap: 16px;
+    }
+
+    .data-row.full-width {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .data-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
     .data-value {
-      font-size: 0.97rem;
-      color: var(--text);
-      line-height: 1.6;
-      word-break: break-word;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #e5e7eb;
+      text-align: right;
     }
-    .full-width {
-      grid-column: 1 / -1;
+
+    .data-row.full-width .data-value {
+      text-align: left;
+      font-size: 0.92rem;
+      width: 100%;
     }
-    @media (max-width: 800px) {
-      .profile-data {
+
+    @media (max-width: 480px) {
+      .grid {
         grid-template-columns: 1fr;
       }
-    }
-    @media (max-width: 560px) {
-      .container {
-        margin: -20px auto 24px;
-      }
-      .card img {
-        height: 240px;
-      }
-      .data-row {
-        padding: 12px 10px;
+      .photo-container {
+        height: 320px;
       }
     }
   </style>
@@ -143,307 +268,808 @@
 <body>
   <header>
     <h1>Perfiles Ciudadanos</h1>
-    <p>Lista limpia de ciudadanos con su información básica y foto facial.</p>
+    <p>Registro civil y visualización de identidades digitales</p>
   </header>
+  
   <main class="container">
     <section class="grid">
       <article class="card">
-        <img src="img/foto_0942014143.jpg" alt="Foto de MORENO LENIS WAGNER VIRGILIO">
+        <div class="photo-container">
+          <img src="img/foto_0942014143.jpg" alt="Foto de MORENO LENIS WAGNER VIRGILIO" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">MORENO LENIS WAGNER VIRGILIO</h2>
-          <p class="subtitle">Cédula 0942014143 • Nacido 2003-09-23 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0942014143</span>
+            <span class="subtitle-badge">Nacimiento: 2003-09-23</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V1333V2222</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / DAULE / DAULE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">MORENO INESTROZA WALNER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">LENIS FAJARDO INGRID LUCIA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V1333V2222</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / DAULE / DAULE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">MORENO INESTROZA WALNER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">LENIS FAJARDO INGRID LUCIA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0927979864.jpg" alt="Foto de BAJAÑA PINELA RONNY RAUL">
+        <div class="photo-container">
+          <img src="img/foto_0927979864.jpg" alt="Foto de BAJAÑA PINELA RONNY RAUL" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">BAJAÑA PINELA RONNY RAUL</h2>
-          <p class="subtitle">Cédula 0927979864 • Nacido 2005-03-03 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0927979864</span>
+            <span class="subtitle-badge">Nacimiento: 2005-03-03</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V3343I3242</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">BAJAÑA VILLAMAR RAUL</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">PINELA ALVARADO CECILIA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V3343I3242</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">BAJAÑA VILLAMAR RAUL</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">PINELA ALVARADO CECILIA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0953838844.jpg" alt="Foto de TAGLE VICTOR MARIA JOSE">
+        <div class="photo-container">
+          <img src="img/foto_0953838844.jpg" alt="Foto de TAGLE VICTOR MARIA JOSE" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">TAGLE VICTOR MARIA JOSE</h2>
-          <p class="subtitle">Cédula 0953838844 • Nacido 2006-04-27 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0953838844</span>
+            <span class="subtitle-badge">Nacimiento: 2006-04-27</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V4443V4442</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">TAGLE LOPEZ KLEBER MANUEL</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">VICTOR QUIMI ROSA HAYDEE</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V4443V4442</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">TAGLE LOPEZ KLEBER MANUEL</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">VICTOR QUIMI ROSA HAYDEE</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0942645664.jpg" alt="Foto de MANZABA MORAN JEREMY JAREN">
+        <div class="photo-container">
+          <img src="img/foto_0942645664.jpg" alt="Foto de MANZABA MORAN JEREMY JAREN" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">MANZABA MORAN JEREMY JAREN</h2>
-          <p class="subtitle">Cédula 0942645664 • Nacido 2004-11-12 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0942645664</span>
+            <span class="subtitle-badge">Nacimiento: 2004-11-12</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E3333I2241</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">MANZABA GOMEZ JOSE FAUSTINO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">MORAN SALAZAR LUCIA CECIBEL</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E3333I2241</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">MANZABA GOMEZ JOSE FAUSTINO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">MORAN SALAZAR LUCIA CECIBEL</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0944238641.jpg" alt="Foto de HERRERA BURGOS ISAAC BENONI">
+        <div class="photo-container">
+          <img src="img/foto_0944238641.jpg" alt="Foto de HERRERA BURGOS ISAAC BENONI" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">HERRERA BURGOS ISAAC BENONI</h2>
-          <p class="subtitle">Cédula 0944238641 • Nacido 2003-03-09 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0944238641</span>
+            <span class="subtitle-badge">Nacimiento: 2003-03-09</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V4444V4444</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / MILAGRO / MILAGRO</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">HERRERA OLVERA ALONSO SIMON</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">BURGOS BRIONES CARLOTA ARTEMIA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V4444V4444</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / MILAGRO / MILAGRO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">HERRERA OLVERA ALONSO SIMON</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">BURGOS BRIONES CARLOTA ARTEMIA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0927672485.jpg" alt="Foto de MARTINEZ CASTRO LUIS ALFONSO">
+        <div class="photo-container">
+          <img src="img/foto_0927672485.jpg" alt="Foto de MARTINEZ CASTRO LUIS ALFONSO" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">MARTINEZ CASTRO LUIS ALFONSO</h2>
-          <p class="subtitle">Cédula 0927672485 • Nacido 2004-01-21 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0927672485</span>
+            <span class="subtitle-badge">Nacimiento: 2004-01-21</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E3343I4442</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">MARTINEZ CANDELARIO LUIS GUILLERMO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">CASTRO RIVERA NIEVE GEOCONDA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E3343I4442</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">MARTINEZ CANDELARIO LUIS GUILLERMO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">CASTRO RIVERA NIEVE GEOCONDA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0942636010.jpg" alt="Foto de MANZABA MORAN ANDY JOSEPH">
+        <div class="photo-container">
+          <img src="img/foto_0942636010.jpg" alt="Foto de MANZABA MORAN ANDY JOSEPH" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">MANZABA MORAN ANDY JOSEPH</h2>
-          <p class="subtitle">Cédula 0942636010 • Nacido 2002-06-06 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0942636010</span>
+            <span class="subtitle-badge">Nacimiento: 2002-06-06</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E4443V4442</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">MANZABA GOMEZ JOSE FAUSTINO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">MORAN SALAZAR LUCIA CECIBEL</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E4443V4442</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / CARBO (CONCEPCION)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">MANZABA GOMEZ JOSE FAUSTINO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">MORAN SALAZAR LUCIA CECIBEL</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0941501165.jpg" alt="Foto de CEDEÑO MANZABA ALAN JUSTIN">
+        <div class="photo-container">
+          <img src="img/foto_0941501165.jpg" alt="Foto de CEDEÑO MANZABA ALAN JUSTIN" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">CEDEÑO MANZABA ALAN JUSTIN</h2>
-          <p class="subtitle">Cédula 0941501165 • Nacido 2002-11-12 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0941501165</span>
+            <span class="subtitle-badge">Nacimiento: 2002-11-12</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V4444V4444</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">CEDEÑO PICO HUGO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">MANZABA GOMEZ NELLY</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V4444V4444</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">CEDEÑO PICO HUGO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">MANZABA GOMEZ NELLY</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0942300161.jpg" alt="Foto de HUAYAMAVE LEON ANTHONY JAMES">
+        <div class="photo-container">
+          <img src="img/foto_0942300161.jpg" alt="Foto de HUAYAMAVE LEON ANTHONY JAMES" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">HUAYAMAVE LEON ANTHONY JAMES</h2>
-          <p class="subtitle">Cédula 0942300161 • Nacido 2003-09-15 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0942300161</span>
+            <span class="subtitle-badge">Nacimiento: 2003-09-15</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V3343I3222</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / DAULE / DAULE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">HUAYAMAVE RIVAS JAME</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">LEON MEJIA ROSA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V3343I3222</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / DAULE / DAULE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">HUAYAMAVE RIVAS JAME</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">LEON MEJIA ROSA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0929980654.jpg" alt="Foto de ALVARADO MEDINA FREDDY ENRIQUE">
+        <div class="photo-container">
+          <img src="img/foto_0929980654.jpg" alt="Foto de ALVARADO MEDINA FREDDY ENRIQUE" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">ALVARADO MEDINA FREDDY ENRIQUE</h2>
-          <p class="subtitle">Cédula 0929980654 • Nacido 2004-02-11 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0929980654</span>
+            <span class="subtitle-badge">Nacimiento: 2004-02-11</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V3343V2242</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / NOBOL / NARCISA DE JESUS</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">ALVARADO MORAN FREDDY ALEJANDRO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">MEDINA ESPINOZA LIDIA ENRIQUETA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V3343V2242</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / NOBOL / NARCISA DE JESUS</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">ALVARADO MORAN FREDDY ALEJANDRO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">MEDINA ESPINOZA LIDIA ENRIQUETA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0950787010.jpg" alt="Foto de VELASCO RIVAS DIEGO ALEJANDRO">
+        <div class="photo-container">
+          <img src="img/foto_0950787010.jpg" alt="Foto de VELASCO RIVAS DIEGO ALEJANDRO" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">VELASCO RIVAS DIEGO ALEJANDRO</h2>
-          <p class="subtitle">Cédula 0950787010 • Nacido 2003-02-28 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0950787010</span>
+            <span class="subtitle-badge">Nacimiento: 2003-02-28</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V3343E1242</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">VELASCO VELASCO LUIS MIGUEL</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">RIVAS RIVAS MARCELA VERONICA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V3343E1242</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">VELASCO VELASCO LUIS MIGUEL</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">RIVAS RIVAS MARCELA VERONICA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0957021207.jpg" alt="Foto de NEGRETE BARZOLA ANGEL MIGUEL">
+        <div class="photo-container">
+          <img src="img/foto_0957021207.jpg" alt="Foto de NEGRETE BARZOLA ANGEL MIGUEL" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">NEGRETE BARZOLA ANGEL MIGUEL</h2>
-          <p class="subtitle">Cédula 0957021207 • Nacido 2006-08-15 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0957021207</span>
+            <span class="subtitle-badge">Nacimiento: 2006-08-15</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V3333V2222</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / DAULE / DAULE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">NEGRETE RONQUILLO ANGEL MARCELO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">BARZOLA PALMA MARTHA CECILIA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V3333V2222</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / DAULE / DAULE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">NEGRETE RONQUILLO ANGEL MARCELO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">BARZOLA PALMA MARTHA CECILIA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0958719957.jpg" alt="Foto de JACOME BAZURTO JOSE EDUARDO">
+        <div class="photo-container">
+          <img src="img/foto_0958719957.jpg" alt="Foto de JACOME BAZURTO JOSE EDUARDO" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">JACOME BAZURTO JOSE EDUARDO</h2>
-          <p class="subtitle">Cédula 0958719957 • Nacido 2003-07-14 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0958719957</span>
+            <span class="subtitle-badge">Nacimiento: 2003-07-14</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E2443I4442</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / DAULE / DAULE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">HOMBRE</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">JACOME ARAGUNDI EDUARDO ROBINSON</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">BAZURTO RUIZ MAIRA ALEXANDRA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E2443I4442</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / DAULE / DAULE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">HOMBRE</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">JACOME ARAGUNDI EDUARDO ROBINSON</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">BAZURTO RUIZ MAIRA ALEXANDRA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_1317907242.jpg" alt="Foto de CEVALLOS FLORES ANGELES YALESKA">
+        <div class="photo-container">
+          <img src="img/foto_1317907242.jpg" alt="Foto de CEVALLOS FLORES ANGELES YALESKA" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">CEVALLOS FLORES ANGELES YALESKA</h2>
-          <p class="subtitle">Cédula 1317907242 • Nacido 2006-09-09 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 1317907242</span>
+            <span class="subtitle-badge">Nacimiento: 2006-09-09</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V3343I2442</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">MANABI / PORTOVIEJO / PORTOVIEJO</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">CEVALLOS CARRANZA WELLINGTON EMILIO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">FLORES INTRIAGO JENNY ELIZABETH</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V3343I2442</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">MANABI / PORTOVIEJO / PORTOVIEJO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">CEVALLOS CARRANZA WELLINGTON EMILIO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">FLORES INTRIAGO JENNY ELIZABETH</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0927977116.jpg" alt="Foto de QUINTO PINELA MELANY ISABEL">
+        <div class="photo-container">
+          <img src="img/foto_0927977116.jpg" alt="Foto de QUINTO PINELA MELANY ISABEL" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">QUINTO PINELA MELANY ISABEL</h2>
-          <p class="subtitle">Cédula 0927977116 • Nacido 2002-08-13 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0927977116</span>
+            <span class="subtitle-badge">Nacimiento: 2002-08-13</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E3133I1121</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / DAULE / DAULE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">QUINTO BRIONES SANTOS</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">PINELA ALVARADO ISABEL</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E3133I1121</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / DAULE / DAULE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">QUINTO BRIONES SANTOS</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">PINELA ALVARADO ISABEL</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0927978171.jpg" alt="Foto de QUINTO PINELA MEYVE LISSETTE">
+        <div class="photo-container">
+          <img src="img/foto_0927978171.jpg" alt="Foto de QUINTO PINELA MEYVE LISSETTE" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">QUINTO PINELA MEYVE LISSETTE</h2>
-          <p class="subtitle">Cédula 0927978171 • Nacido 2000-07-09 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0927978171</span>
+            <span class="subtitle-badge">Nacimiento: 2000-07-09</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E1133I1222</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / DAULE / DAULE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">CASADO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">QUINTO BRIONES SANTOS CARLOS</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">PINELA ALVARADO ISABEL ENRIQUETA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E1133I1222</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / DAULE / DAULE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">CASADO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">QUINTO BRIONES SANTOS CARLOS</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">PINELA ALVARADO ISABEL ENRIQUETA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_1105525966.jpg" alt="Foto de LUZURIAGA ERAS ALLISON LISBETH">
+        <div class="photo-container">
+          <img src="img/foto_1105525966.jpg" alt="Foto de LUZURIAGA ERAS ALLISON LISBETH" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">LUZURIAGA ERAS ALLISON LISBETH</h2>
-          <p class="subtitle">Cédula 1105525966 • Nacido 2006-06-23 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 1105525966</span>
+            <span class="subtitle-badge">Nacimiento: 2006-06-23</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">V4343I2242</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">LOJA / LOJA / EL SAGRARIO</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">LUZURIAGA VARGAS ELADIO BENIGNO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">ERAS GUTIERREZ ROSA PIEDAD</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">V4343I2242</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">LOJA / LOJA / EL SAGRARIO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">LUZURIAGA VARGAS ELADIO BENIGNO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">ERAS GUTIERREZ ROSA PIEDAD</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_2450242215.jpg" alt="Foto de MERA QUIMIS NAOMI BELEN">
+        <div class="photo-container">
+          <img src="img/foto_2450242215.jpg" alt="Foto de MERA QUIMIS NAOMI BELEN" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">MERA QUIMIS NAOMI BELEN</h2>
-          <p class="subtitle">Cédula 2450242215 • Nacido 2006-12-11 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 2450242215</span>
+            <span class="subtitle-badge">Nacimiento: 2006-12-11</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">A1341I1121</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">SANTA ELENA / LA LIBERTAD / LA LIBERTAD</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">MERA MERA WILSON KLEBER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">QUIMIS CAJAPE ELENA MONICA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">A1341I1121</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">SANTA ELENA / LA LIBERTAD / LA LIBERTAD</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">MERA MERA WILSON KLEBER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">QUIMIS CAJAPE ELENA MONICA</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_1150025359.jpg" alt="Foto de CORONEL SANTISTEVAN NAYDELIN ELIZABETH">
+        <div class="photo-container">
+          <img src="img/foto_1150025359.jpg" alt="Foto de CORONEL SANTISTEVAN NAYDELIN ELIZABETH" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">CORONEL SANTISTEVAN NAYDELIN ELIZABETH</h2>
-          <p class="subtitle">Cédula 1150025359 • Nacido 2006-07-19 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 1150025359</span>
+            <span class="subtitle-badge">Nacimiento: 2006-07-19</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">I1343A1122</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">LOJA / LOJA / SUCRE</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">CORONEL JARAMILLO MAURICIO EDUARDO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">SANTISTEVAN GUAMAN VERONICA ELIZABETH</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">I1343A1122</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">LOJA / LOJA / SUCRE</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">CORONEL JARAMILLO MAURICIO EDUARDO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">SANTISTEVAN GUAMAN VERONICA ELIZABETH</span>
+            </div>
           </div>
         </div>
       </article>
       <article class="card">
-        <img src="img/foto_0928821487.jpg" alt="Foto de MEJIA BRIONES MAYLEEN ANABEL">
+        <div class="photo-container">
+          <img src="img/foto_0928821487.jpg" alt="Foto de MEJIA BRIONES MAYLEEN ANABEL" loading="lazy">
+          <div class="photo-overlay"></div>
+          <span class="doc-type-badge">ECUATORIANA</span>
+        </div>
         <div class="card-body">
           <h2 class="card-title">MEJIA BRIONES MAYLEEN ANABEL</h2>
-          <p class="subtitle">Cédula 0928821487 • Nacido 2004-03-12 • ECUATORIANA</p>
+          <div class="subtitle-wrapper">
+            <span class="subtitle-badge cedula-badge">ID: 0928821487</span>
+            <span class="subtitle-badge">Nacimiento: 2004-03-12</span>
+          </div>
           <div class="profile-data">
-            <div class="data-row"><span class="data-label">Código dactilar</span><span class="data-value">E1333I1212</span></div>
-            <div class="data-row"><span class="data-label">Lugar de nacimiento</span><span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span></div>
-            <div class="data-row"><span class="data-label">Estado civil</span><span class="data-value">SOLTERO</span></div>
-            <div class="data-row"><span class="data-label">Género / Sexo</span><span class="data-value">MUJER</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre del padre</span><span class="data-value">MEJIA PERALTA RUBEN ARTURO</span></div>
-            <div class="data-row full-width"><span class="data-label">Nombre de la madre</span><span class="data-value">BRIONES CEDEÑO TERESA ANTONIA</span></div>
+            <div class="data-row">
+              <span class="data-label">Código dactilar</span>
+              <span class="data-value">E1333I1212</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Lugar de nacimiento</span>
+              <span class="data-value">GUAYAS / GUAYAQUIL / BOLIVAR (SAGRARIO)</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Estado civil</span>
+              <span class="data-value">SOLTERO</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Género / Sexo</span>
+              <span class="data-value">MUJER</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Padre</span>
+              <span class="data-value">MEJIA PERALTA RUBEN ARTURO</span>
+            </div>
+            <div class="data-row full-width">
+              <span class="data-label">Madre</span>
+              <span class="data-value">BRIONES CEDEÑO TERESA ANTONIA</span>
+            </div>
           </div>
         </div>
       </article>
