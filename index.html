@@ -138,7 +138,8 @@
     .photo-container img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      padding: 16px;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -146,13 +147,9 @@
       transform: scale(1.05);
     }
 
-    /* Fade-out gradient overlay on photo (fades to the right into the body) */
+    /* Fade-out gradient overlay disabled to keep the photo completely clear */
     .photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, transparent 60%, var(--card-bg) 100%),
-                  linear-gradient(to top, rgba(17, 24, 39, 0.5) 0%, transparent 40%);
-      pointer-events: none;
+      display: none;
     }
 
     /* Badge on photo */
@@ -270,9 +267,6 @@
         width: 100%;
         height: 340px;
         min-height: auto;
-      }
-      .photo-overlay {
-        background: linear-gradient(to top, var(--card-bg) 0%, rgba(17, 24, 39, 0.4) 60%, transparent 100%);
       }
       .doc-type-badge {
         left: auto;
