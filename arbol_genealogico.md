@@ -11,8 +11,8 @@ graph TD
     B4[Jacinta Chavez] --> MGM[Maria Mercedes Chavez<br>CI: 0100189547]
 
     %% Abuelos
-    PGF[Arturo Alberto Avilés Peñafiel] --> F[Arturo Roberto Avilés Gomez<br>CI: 0916937683]
-    PGM[Yolanda del Pilar Gomez Pin Argote] --> F
+    PGF[Arturo Orly Avilés Ramirez] --> F[Arturo Roberto Avilés Gomez<br>CI: 0916260698]
+    PGM[Clemencia Vitalia Gomez Peñafiel] --> F
     
     MGF --> M[Francia Lucciola Ronquillo Chavez]
     MGM --> M
@@ -37,11 +37,11 @@ graph TD
 ### 1. Generación de Padres
 
 #### Padre: **Arturo Roberto Avilés Gomez**
-* **Cédula:** `0916937683`
+* **Cédula:** `0916260698`
 * **Fecha de Nacimiento:** `1972-04-12`
-* **Lugar de Nacimiento:** Guayas / Guayaquil / Carbo (Concepción)
-* **Padre:** Arturo Alberto Avilés Peñafiel (Abuelo Paterno)
-* **Madre:** Yolanda del Pilar Gomez Pin Argote (Abuela Paterna)
+* **Lugar de Nacimiento:** Guayas / Milagro / Milagro
+* **Padre:** Arturo Orly Avilés Ramirez (Abuelo Paterno)
+* **Madre:** Clemencia Vitalia Gomez Peñafiel (Abuela Paterna)
 
 #### Madre: **Francia Lucciola Ronquillo Chavez**
 * **Padre:** Marconi Leonidas Ronquillo Ronquillo (Abuelo Materno)
