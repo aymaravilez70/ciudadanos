@@ -1373,6 +1373,44 @@
         }
       }
 
+      function getZodiacSign(birthdayStr) {
+        if (!birthdayStr) return "";
+        const parts = birthdayStr.split('-');
+        if (parts.length !== 3) return "";
+        const month = parseInt(parts[1], 10);
+        const day = parseInt(parts[2], 10);
+
+        const signs = [
+          { name: "Capricornio ♑", start: [12, 22], end: [1, 19] },
+          { name: "Acuario ♒", start: [1, 20], end: [2, 18] },
+          { name: "Piscis ♓", start: [2, 19], end: [3, 20] },
+          { name: "Aries ♈", start: [3, 21], end: [4, 19] },
+          { name: "Tauro ♉", start: [4, 20], end: [5, 20] },
+          { name: "Géminis ♊", start: [5, 21], end: [6, 20] },
+          { name: "Cáncer ♋", start: [6, 21], end: [7, 22] },
+          { name: "Leo ♌", start: [7, 23], end: [8, 22] },
+          { name: "Virgo ♍", start: [8, 23], end: [9, 22] },
+          { name: "Libra ♎", start: [9, 23], end: [10, 22] },
+          { name: "Escorpio ♏", start: [10, 23], end: [11, 21] },
+          { name: "Sagitario ♐", start: [11, 22], end: [12, 21] }
+        ];
+
+        for (const sign of signs) {
+          const [sMonth, sDay] = sign.start;
+          const [eMonth, eDay] = sign.end;
+          
+          if (
+            (month === sMonth && day >= sDay) ||
+            (month === eMonth && day <= eDay) ||
+            (sMonth === 12 && month === 12 && day >= 22) ||
+            (sMonth === 12 && month === 1 && day <= 19)
+          ) {
+            return sign.name;
+          }
+        }
+        return "";
+      }
+
       // Parse birth date from each card
       cards.forEach(card => {
         const badges = card.querySelectorAll(".subtitle-badge");
@@ -1385,6 +1423,7 @@
         card.dataset.birthday = dateText;
         card.dataset.daysLeft = getDaysUntilBirthday(dateText);
         card.dataset.upcomingAge = getUpcomingAge(dateText);
+        card.dataset.zodiac = getZodiacSign(dateText);
       });
 
       btnSort.addEventListener("click", () => {
@@ -1403,16 +1442,17 @@
           
           const days = parseInt(card.dataset.daysLeft);
           const age = card.dataset.upcomingAge;
+          const zodiac = card.dataset.zodiac;
           
           if (days === 0 || days === 365) {
             badge.className = "birthday-badge today";
-            badge.innerHTML = `🎂 ¡Hoy cumple ${age} años! 🎉`;
+            badge.innerHTML = `🎂 ¡Hoy cumple ${age} años! 🎉 • ${zodiac}`;
           } else if (days === 1) {
             badge.className = "birthday-badge";
-            badge.innerHTML = `🎂 Mañana cumple ${age} años`;
+            badge.innerHTML = `🎂 Mañana cumple ${age} años • ${zodiac}`;
           } else {
             badge.className = "birthday-badge";
-            badge.innerHTML = `🎁 Cumpleaños en ${days} días (cumplirá ${age})`;
+            badge.innerHTML = `🎁 Cumpleaños en ${days} días (cumplirá ${age}) • ${zodiac}`;
           }
           
           grid.appendChild(card);
